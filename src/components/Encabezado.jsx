@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Encabezado.css";
 
 export const Encabezado = ({
@@ -33,11 +34,18 @@ export const Encabezado = ({
         <img className="w-28" src="logo.jpg" alt="" />
         <nav>
           <ul className="flex justify-center space-x-10 text-black">
-            <li className="hover:text-gray-500">Home</li>
-            <li className="hover:text-gray-500">Shop</li>
-            <li className="hover:text-gray-500">About us</li>
-            <li className="hover:text-gray-500">Blog</li>
-            <li className="hover:text-gray-500">Contact us</li>
+            <li className="hover:text-gray-500">
+              <Link to="/">Home</Link>
+            </li>
+            <li className="hover:text-gray-500">
+              <Link to="/tienda">Tienda</Link>
+            </li>
+            <li className="hover:text-gray-500">
+              <Link to="/nosotros">Nosotros</Link>
+            </li>
+            <li className="hover:text-gray-500">
+              <Link to="/contactanos">Contactanos</Link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -87,7 +95,10 @@ export const Encabezado = ({
                         strokeWidth="1.5"
                         stroke="currentColor"
                         className="icono-cerrar"
-                        onClick={() => eliminarProducto(producto)}
+                        onClick={() => {
+                          eliminarProducto(producto);
+                          setActivo(true);
+                        }}
                       >
                         <path
                           strokeLinecap="round"
@@ -104,8 +115,8 @@ export const Encabezado = ({
                   <span className="total-pagar">S/.{total}</span>
                 </div>
 
-                <div className="btn-vaciar">
-                  <button onClick={vaciarCarrito}>Vaciar Carrito</button>
+                <div className="btn-vaciar" onClick={vaciarCarrito}>
+                  <button>Vaciar Carrito</button>
                 </div>
               </>
             ) : (
