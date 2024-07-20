@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import { Encabezado } from "./components/Encabezado";
-import Footer from './components/Footer';
+import Footer from "./components/Footer";
 import Home from "./Pages/Home";
 import Tienda from "./Pages/Tienda";
 import Nosotros from "./Pages/Nosotros";
@@ -38,11 +38,23 @@ function App() {
               />
             }
           />
-          <Route path="/tienda" element={<Tienda />} />
+          <Route
+            path="/tienda"
+            element={
+              <Tienda
+                carrito={carrito}
+                setCarrito={setCarrito}
+                total={total}
+                setTotal={setTotal}
+                contador={contador}
+                setContador={setContador}
+              />
+            }
+          />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/contactanos" element={<Contactanos />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </Router>
     </>
   );

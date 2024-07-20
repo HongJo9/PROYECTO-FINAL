@@ -5,10 +5,6 @@ export default function Footer() {
     <footer className="bg-gray-800 text-white py-8">
       <div className="container mx-auto flex flex-wrap justify-around">
         <div className="w-full sm:w-1/3 mb-6 sm:mb-0">
-          <h3 className="text-lg font-semibold mb-2">Sobre Nosotros</h3>
-          <p className="text-sm">Información sobre la empresa, misión, visión y valores.</p>
-        </div>
-        <div className="w-full sm:w-1/3 mb-6 sm:mb-0">
           <h3 className="text-lg font-semibold mb-2">Enlaces Rápidos</h3>
           <ul>
             <li className="mb-2">
@@ -27,12 +23,12 @@ export default function Footer() {
         </div>
         <div className="w-full sm:w-1/3">
           <h3 className="text-lg font-semibold mb-2">Contacto</h3>
-          <p className="text-sm">Email: contacto@tuempresa.com</p>
-          <p className="text-sm">Teléfono: (123) 456-7890</p>
+          <p className="text-sm">Email: @tuempresa.com</p>
+          <p className="text-sm">Teléfono: (+51) 955 257 611</p>
         </div>
       </div>
       <div className="text-center mt-8">
-        <p className="text-sm">&copy; {new Date().getFullYear()} Tu Empresa. Todos los derechos reservados.</p>
+        <p className="text-sm">&copy; {new Date().getFullYear()} Empresa Hong Jo. Todos los derechos reservados.</p>
       </div>
     </footer>
   );

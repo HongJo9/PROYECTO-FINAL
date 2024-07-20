@@ -42,5 +42,19 @@ export const data = [
 		price: 20,
 		quantity: 1,
 	},
+	{
+		id: 7,
+		img: 'Producto_5.jpg',
+		nameProduct: 'Auricular led blue',
+		price: 20,
+		quantity: 1,
+	},
+	{
+		id: 8,
+		img: 'Producto_5.jpg',
+		nameProduct: 'Auricular led blue',
+		price: 20,
+		quantity: 1,
+	},
 	// Aquí pueden agregar más o modificar los productos existentes
 ];

@@ -13,9 +13,6 @@ export default function Home({
   return (
     <>
       <div className="home">
-      <div>
-        Hola
-    </div>
         <ListaProductos
           carrito={carrito}
           setCarrito={setCarrito}
