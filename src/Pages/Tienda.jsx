@@ -4,14 +4,7 @@ import React from "react";
 import Portada from "../components/Portada";
 import "./Tiendas.css";
 
-const Tienda = ({
-  carrito,
-  setCarrito,
-  total,
-  contador,
-  setContador,
-  setTotal,
-}) => {
+const Tienda = ({}) => {
   const tienda = "Tienda";
   return (
     <>
@@ -44,14 +37,7 @@ const Tienda = ({
             </div>
           </div>
 
-          <ListaProductos
-            carrito={carrito}
-            setCarrito={setCarrito}
-            total={total}
-            setTotal={setTotal}
-            contador={contador}
-            setContador={setContador}
-          />
+          <ListaProductos/>
         </div>
       </div>
     </>

@@ -1,9 +1,18 @@
-import React, { createContext } from 'react'
-export const ContextApp=createContext()
-imp
+import React, {useState} from "react";
+import proveedor from "./proveedor";
 
-export default function ContextProvider( {children} ) {
+const ContextApp = ({ children }) => {
+  const [carrito, setCarrito] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [contador, setContador] = useState(0);
+
   return (
-    <div>Hongjo {children}</div>
-  )
-}
+    <proveedor.Provider
+      value={{ carrito, setCarrito, total, setTotal, contador, setContador }}
+    >
+      {children}
+    </proveedor.Provider>
+  );
+};
+
+export default ContextApp;

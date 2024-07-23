@@ -1,21 +1,18 @@
 import { data } from '../Data'; // Asegúrate de que el nombre del archivo y la importación coincidan exactamente.
 import './ListaProductos.css'
+import { useContext } from 'react';
+import proveedor from '../context/proveedor';
 
-export const ListaProductos = ({
-  carrito,
-  setCarrito,
-  contador,
-  setContador,
-  total,
-  setTotal,
-}) => {
+export const ListaProductos = ({ }) => {
+  const {carrito, setCarrito, total, setTotal, contador, setContador} = useContext(proveedor)
+
   const agregarProducto = (producto) => {
     const productoEnCarrito = carrito.find(item => item.id === producto.id);
 
     if (productoEnCarrito) {
       const productosActualizados = carrito.map(item =>
         item.id === producto.id
-          ? { ...item, quantity: item.quantity + 1 }
+          ? { ...item, stock: item.stock + 1 }
           : item
       );
       setCarrito(productosActualizados);
@@ -23,7 +20,7 @@ export const ListaProductos = ({
       setCarrito([...carrito, producto]);
     }
 
-    setTotal(prevTotal => prevTotal + producto.price);
+    setTotal(prevTotal => prevTotal + producto.precio);
     setContador(prevCount => prevCount + 1);
   };
 
@@ -32,11 +29,11 @@ export const ListaProductos = ({
       {data.map(producto => (
         <div className='producto' key={producto.id}>
           <figure>
-            <img src={producto.img} alt={producto.nameProduct} />
+            <img src={producto.img} alt={producto.nombreProducto} />
           </figure>
           <div className='info-producto'>
-            <h2>{producto.nameProduct}</h2>
-            <p className='precio'>S/.{producto.price}</p>
+            <h2>{producto.nombreProducto}</h2>
+            <p className='precio'>S/.{producto.precio}</p>
             <button onClick={() => agregarProducto(producto)}>
               Añadir al carrito
             </button>
