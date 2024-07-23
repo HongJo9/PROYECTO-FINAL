@@ -1,43 +1,172 @@
 import "./General.css";
-import { ListaProductos } from "../components/ListaProductos";
-import React from "react";
+import { data } from "../Data";
+import React, { useContext, useState } from "react";
 import Portada from "../components/Portada";
 import "./Tiendas.css";
+import proveedor from "../context/proveedor";
 
-const Tienda = ({}) => {
+const Tienda = () => {
   const tienda = "Tienda";
+
+  const { carrito, setCarrito, total, setTotal, contador, setContador } =
+    useContext(proveedor);
+
+  // Estados para los filtros múltiples
+  const [filtrosColor, setFiltrosColor] = useState([]);
+  const [filtrosModelo, setFiltrosModelo] = useState([]);
+  const [filtrosMarca, setFiltrosMarca] = useState([]);
+
+  // Estado para la paginación
+  const [paginaActual, setPaginaActual] = useState(1);
+  const productosPorPagina = 6;
+
+  const agregarProducto = (producto) => {
+    const productoEnCarrito = carrito.find((item) => item.id === producto.id);
+
+    if (productoEnCarrito) {
+      const productosActualizados = carrito.map((item) =>
+        item.id === producto.id ? { ...item, stock: item.stock + 1 } : item
+      );
+      setCarrito(productosActualizados);
+    } else {
+      setCarrito([...carrito, producto]);
+    }
+
+    setTotal((prevTotal) => prevTotal + producto.precio);
+    setContador((prevCount) => prevCount + 1);
+  };
+
+  const toggleFiltro = (filtro, setFiltro, valor) => {
+    setFiltro((prev) =>
+      prev.includes(valor)
+        ? prev.filter((item) => item !== valor)
+        : [...prev, valor]
+    );
+  };
+
+  // Filtrar los productos basados en los filtros seleccionados
+  const productosFiltrados = data.filter((producto) => {
+    return (
+      (filtrosColor.length === 0 || filtrosColor.includes(producto.color)) &&
+      (filtrosModelo.length === 0 || filtrosModelo.includes(producto.modelo)) &&
+      (filtrosMarca.length === 0 || filtrosMarca.includes(producto.marca))
+    );
+  });
+
+  // Calcular el índice de inicio y fin para la paginación
+  const indiceInicio = (paginaActual - 1) * productosPorPagina;
+  const indiceFin = indiceInicio + productosPorPagina;
+  const productosPaginados = productosFiltrados.slice(indiceInicio, indiceFin);
+
+  const numeroPaginas = Math.ceil(
+    productosFiltrados.length / productosPorPagina
+  );
+
+  const cambiarPagina = (numeroPagina) => {
+    setPaginaActual(numeroPagina);
+  };
+
   return (
     <>
-      <div className="tienda ">
+      <div className="tienda">
         <div>
           <Portada props={tienda} />
         </div>
         <div className="grid grid-cols-[20%_auto] py-5">
+          {/* Los filtros para la tienda */}
           <div className="filtro">
-            <div className="bg-white p-6 rounded-2xl shadow-lg ">
+            <div className="bg-white p-6 rounded-2xl shadow-lg">
               <h2 className="font-bold text-2xl">Filtros de Productos</h2>
               <h3 className="font-medium text-2xl text-red-600">Colores</h3>
-              <ul className="space-y-2 ">
-                <li className="p-2 bg-gray-100 rounded">Rojo</li>
-                <li className="p-2 bg-gray-100 rounded">Azul</li>
-                <li className="p-2 bg-gray-100 rounded">Negro</li>
+              <ul className="space-y-2">
+                {["rojo", "azul", "negro"].map((color) => (
+                  <li
+                    key={color}
+                    className={`p-2 bg-gray-100 rounded cursor-pointer ${
+                      filtrosColor.includes(color) ? "bg-blue-300" : ""
+                    }`}
+                    onClick={() =>
+                      toggleFiltro(filtrosColor, setFiltrosColor, color)
+                    }
+                  >
+                    {color.charAt(0).toUpperCase() + color.slice(1)}
+                  </li>
+                ))}
               </ul>
               <h3 className="font-medium text-2xl text-red-600">Modelos</h3>
-              <ul className="space-y-2 ">
-                <li className="p-2 bg-gray-100 rounded">Inalambricos</li>
-                <li className="p-2 bg-gray-100 rounded">Alambricos</li>
-                <li className="p-2 bg-gray-100 rounded">Airphones</li>
+              <ul className="space-y-2">
+                {["inalambrico", "alambrico", "airphones"].map((modelo) => (
+                  <li
+                    key={modelo}
+                    className={`p-2 bg-gray-100 rounded cursor-pointer ${
+                      filtrosModelo.includes(modelo) ? "bg-blue-300" : ""
+                    }`}
+                    onClick={() =>
+                      toggleFiltro(filtrosModelo, setFiltrosModelo, modelo)
+                    }
+                  >
+                    {modelo.charAt(0).toUpperCase() + modelo.slice(1)}
+                  </li>
+                ))}
               </ul>
               <h3 className="font-medium text-2xl text-red-600">Marcas</h3>
-              <ul className="space-y-2 ">
-                <li className="p-2 bg-gray-100 rounded">JBL</li>
-                <li className="p-2 bg-gray-100 rounded">EWTTO</li>
-                <li className="p-2 bg-gray-100 rounded">REDD</li>
+              <ul className="space-y-2">
+                {["JBL", "EWTTO", "REDD"].map((marca) => (
+                  <li
+                    key={marca}
+                    className={`p-2 bg-gray-100 rounded cursor-pointer ${
+                      filtrosMarca.includes(marca) ? "bg-blue-300" : ""
+                    }`}
+                    onClick={() =>
+                      toggleFiltro(filtrosMarca, setFiltrosMarca, marca)
+                    }
+                  >
+                    {marca}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
-
-          <ListaProductos/>
+          <div>
+            {/* Los productos mostrados desde la tienda */}
+            <div className="contenedor-productos">
+              {productosPaginados.map((producto) => (
+                <div className="producto" key={producto.id}>
+                  <figure>
+                    <img src={producto.img} alt={producto.nombreProducto} />
+                  </figure>
+                  <div className="info-producto">
+                    <div className="info-producto-detalles">
+                      <h2>{producto.nombreProducto}</h2>
+                      <p className="precio">S/.{producto.precio}</p>
+                    </div>
+                    <div>
+                      <button onClick={() => agregarProducto(producto)}>
+                        Añadir al carrito
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div></div>
+          <div>
+            {/* Paginación */}
+            <div className="paginacion">
+              {Array.from({ length: numeroPaginas }, (_, index) => (
+                <button
+                  key={index}
+                  className={`paginacion-boton ${
+                    paginaActual === index + 1 ? "activo" : ""
+                  }`}
+                  onClick={() => cambiarPagina(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </>

@@ -7,7 +7,7 @@ export const data = [
 		precio: 80.5,
 		stock: 1,
 		color: "rojo",
-		modelo: "inalambrico",
+		modelo: "alambrico",
 		marca: "JBL"
 	},
 	{
@@ -16,9 +16,9 @@ export const data = [
 		nombreProducto: 'Reloj',
 		precio: 50,
 		stock: 1,
-		color: "rojo",
-		modelo: "inalambrico",
-		marca: "JBL"
+		color: "azul",
+		modelo: "airphones",
+		marca: "EWTTO"
 	},
 	{
 		id: 3,
@@ -76,7 +76,7 @@ export const data = [
 		nombreProducto: 'Auricular led blue',
 		precio: 20,
 		stock: 1,
-		color: "rojo",
+				color: "rojo",
 		modelo: "inalambrico",
 		marca: "JBL"
 	},

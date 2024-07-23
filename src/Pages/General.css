@@ -3,5 +3,18 @@
 .tienda,
 .contactanos{
     margin: auto;
-    max-width: 1300px;
+    max-width: 1500px;
+}
+
+.paginacion{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.paginacion button{
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    padding: 15px 25px;
 }
