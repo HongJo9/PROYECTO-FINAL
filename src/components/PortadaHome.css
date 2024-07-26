@@ -1,0 +1,75 @@
+.portada-home1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.portada-home2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.portada-home21 {
+  background-image: url("Portada 2-1.jpg");
+  background-size: cover;
+  min-height: 300px;
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* No repite la imagen */
+}
+
+.portada-home22 {
+  background-image: url("Portada 2-2.jpg");
+  background-size: cover;
+  min-height: 300px;
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* No repite la imagen */
+}
+
+.portada-home211 {
+  background-image: url("Portada 2-11.jpg");
+  background-size: cover;
+  min-height: 300px;
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* No repite la imagen */
+}
+
+.portada-home212 {
+  background-image: url("Portada 2-12.jpg");
+  background-size: cover;
+  min-height: 300px;
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* No repite la imagen */
+}
+
+.portada-home221 {
+  background-image: url("Portada 2-21.jpg");
+  background-size: cover;
+  min-height: 300px;
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* No repite la imagen */
+}
+
+.portada-home222 {
+  background-image: url("Portada 2-22.jpg");
+  background-size: cover;
+  min-height: 300px;
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* No repite la imagen */
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .portada-home1 {
+    grid-template-columns: 1fr;
+  }
+
+  .portada-home2 {
+    min-height: 100px;
+  }
+
+  .portada-home21,
+  .portada-home22 {
+    min-height: 200px;
+  }
+}

@@ -24,7 +24,7 @@ export const Encabezado = ({ children }) => {
   return (
     <>
       <header>
-        <div className="amburguesa">
+        <div className="amburguesa" >
           <img className="w-10" src="amburguesa.png" alt="" />
         </div>
         <div className="flex items-center gap-8">
