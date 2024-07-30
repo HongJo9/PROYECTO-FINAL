@@ -124,7 +124,7 @@ const Tienda = () => {
           </div>
           <div>
             {/* Los productos mostrados desde la tienda */}
-            <div className="contenedor-productos-tienda">
+            <div className="contenedor-productos-tienda" style={{ backgroundImage: "url('Baner de paginas TIENDA.jpg')" }}>
               {productosPaginados.map((producto) => (
                 <div className="producto" key={producto.id}>
                   <figure>
