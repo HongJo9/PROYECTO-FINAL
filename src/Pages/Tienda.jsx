@@ -1,20 +1,17 @@
 import "./General.css";
 import { data } from "../Data";
 import React, { useContext, useState } from "react";
-import Portada from "../components/Portada";
 import "./Tiendas.css";
 import proveedor from "../context/proveedor";
 
 const Tienda = () => {
-  const tienda = "Tienda";
-
   const { carrito, setCarrito, total, setTotal, contador, setContador } =
     useContext(proveedor);
 
   // Estados para los filtros múltiples
-  const [filtrosColor, setFiltrosColor] = useState([]);
-  const [filtrosModelo, setFiltrosModelo] = useState([]);
-  const [filtrosMarca, setFiltrosMarca] = useState([]);
+  const [filtroColor, setFiltroColor] = useState(null);
+  const [filtroModelo, setFiltroModelo] = useState(null);
+  const [filtroMarca, setFiltroMarca] = useState(null);
 
   // Estado para la paginación
   const [paginaActual, setPaginaActual] = useState(1);
@@ -25,7 +22,7 @@ const Tienda = () => {
 
     if (productoEnCarrito) {
       const productosActualizados = carrito.map((item) =>
-        item.id === producto.id ? { ...item, stock: item.stock + 1 } : item
+        item.id === producto.id ? { ...item, cantCarrito: item.cantCarrito + 1 } : item
       );
       setCarrito(productosActualizados);
     } else {
@@ -37,19 +34,15 @@ const Tienda = () => {
   };
 
   const toggleFiltro = (filtro, setFiltro, valor) => {
-    setFiltro((prev) =>
-      prev.includes(valor)
-        ? prev.filter((item) => item !== valor)
-        : [...prev, valor]
-    );
+    setFiltro(filtro === valor ? null : valor);
   };
 
   // Filtrar los productos basados en los filtros seleccionados
   const productosFiltrados = data.filter((producto) => {
     return (
-      (filtrosColor.length === 0 || filtrosColor.includes(producto.color)) &&
-      (filtrosModelo.length === 0 || filtrosModelo.includes(producto.modelo)) &&
-      (filtrosMarca.length === 0 || filtrosMarca.includes(producto.marca))
+      (!filtroColor || filtroColor === producto.color) &&
+      (!filtroModelo || filtroModelo === producto.modelo) &&
+      (!filtroMarca || filtroMarca === producto.marca)
     );
   });
 
@@ -69,8 +62,10 @@ const Tienda = () => {
   return (
     <>
       <div className="tienda">
-        <div>
-          <Portada props={tienda} />
+        <div className="portada-tienda">
+          <h1 className="text-white text-6xl font-bold">
+            Nuestra Tienda
+          </h1>
         </div>
         <div className="grid grid-cols-[20%_auto] py-5">
           {/* Los filtros para la tienda */}
@@ -83,10 +78,10 @@ const Tienda = () => {
                   <li
                     key={color}
                     className={`p-2 bg-gray-100 rounded cursor-pointer ${
-                      filtrosColor.includes(color) ? "bg-blue-300" : ""
+                      filtroColor === color ? "bg-red-500 text-red-100" : ""
                     }`}
                     onClick={() =>
-                      toggleFiltro(filtrosColor, setFiltrosColor, color)
+                      toggleFiltro(filtroColor, setFiltroColor, color)
                     }
                   >
                     {color.charAt(0).toUpperCase() + color.slice(1)}
@@ -95,14 +90,14 @@ const Tienda = () => {
               </ul>
               <h3 className="font-medium text-2xl text-red-600">Modelos</h3>
               <ul className="space-y-2">
-                {["inalambrico", "alambrico", "airphones"].map((modelo) => (
+                {["inalambrico", "alambrico"].map((modelo) => (
                   <li
                     key={modelo}
                     className={`p-2 bg-gray-100 rounded cursor-pointer ${
-                      filtrosModelo.includes(modelo) ? "bg-blue-300" : ""
+                      filtroModelo === modelo ? "bg-red-500 text-red-100" : ""
                     }`}
                     onClick={() =>
-                      toggleFiltro(filtrosModelo, setFiltrosModelo, modelo)
+                      toggleFiltro(filtroModelo, setFiltroModelo, modelo)
                     }
                   >
                     {modelo.charAt(0).toUpperCase() + modelo.slice(1)}
@@ -111,14 +106,14 @@ const Tienda = () => {
               </ul>
               <h3 className="font-medium text-2xl text-red-600">Marcas</h3>
               <ul className="space-y-2">
-                {["JBL", "EWTTO", "REDD"].map((marca) => (
+                {["JBL", "EWTTO", "MSI"].map((marca) => (
                   <li
                     key={marca}
                     className={`p-2 bg-gray-100 rounded cursor-pointer ${
-                      filtrosMarca.includes(marca) ? "bg-blue-300" : ""
+                      filtroMarca === marca ? "bg-red-500 text-red-100" : ""
                     }`}
                     onClick={() =>
-                      toggleFiltro(filtrosMarca, setFiltrosMarca, marca)
+                      toggleFiltro(filtroMarca, setFiltroMarca, marca)
                     }
                   >
                     {marca}
@@ -129,7 +124,7 @@ const Tienda = () => {
           </div>
           <div>
             {/* Los productos mostrados desde la tienda */}
-            <div className="contenedor-productos">
+            <div className="contenedor-productos-tienda">
               {productosPaginados.map((producto) => (
                 <div className="producto" key={producto.id}>
                   <figure>

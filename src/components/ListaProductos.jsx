@@ -3,16 +3,18 @@ import "./ListaProductos.css";
 import { useContext } from "react";
 import proveedor from "../context/proveedor";
 
-export const ListaProductos = ({}) => {
+export const ListaProductos = () => {
   const { carrito, setCarrito, total, setTotal, contador, setContador } =
     useContext(proveedor);
 
+    //Comparara si el producto existe en el carritomy si exisitiera simplemente aunmenta la cantidad 
   const agregarProducto = (producto) => {
+    //.find hace comparacion si existe el mismo, y si lo hace, se crea un nuevo array, pero solo para indicar que sea verdadero  
     const productoEnCarrito = carrito.find((item) => item.id === producto.id);
 
     if (productoEnCarrito) {
       const productosActualizados = carrito.map((item) =>
-        item.id === producto.id ? { ...item, stock: item.stock + 1 } : item
+        item.id === producto.id ? { ...item, cantCarrito: item.cantCarrito + 1 } : item
       );
       setCarrito(productosActualizados);
     } else {
@@ -24,7 +26,7 @@ export const ListaProductos = ({}) => {
   };
 
   return (
-    <div className="py-20">
+    <div className="pt-20">
       <div className="text-center">
         <h2 className="font-bold text-5xl">Best Seller Products</h2>
         <p className="text-lg">

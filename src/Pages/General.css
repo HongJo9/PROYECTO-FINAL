@@ -6,6 +6,36 @@
     max-width: 1500px;
 }
 
+.portada-tienda{
+    background-image: url("Baner de paginas TIENDA.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.portada-nosotros{
+    background-image: url("Baner de paginas NOSOTROS.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.portada-contactos{
+    background-image: url("Baner de paginas CONTACTOS.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .paginacion{
     display: flex;
     justify-content: center;

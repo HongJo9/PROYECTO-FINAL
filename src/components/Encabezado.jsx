@@ -10,8 +10,8 @@ export const Encabezado = ({ children }) => {
 
   const eliminarProducto = (producto) => {
     const resultados = carrito.filter((item) => item.id !== producto.id);
-    setTotal(total - producto.precio * producto.stock);
-    setContador(contador - producto.stock);
+    setTotal(total - producto.precio * producto.cantCarrito);
+    setContador(contador - producto.cantCarrito);
     setCarrito(resultados);
   };
 
@@ -24,7 +24,7 @@ export const Encabezado = ({ children }) => {
   return (
     <>
       <header>
-        <div className="amburguesa" >
+        <div className="amburguesa">
           <img className="w-10" src="amburguesa.png" alt="" />
         </div>
         <div className="flex items-center gap-8">
@@ -76,7 +76,7 @@ export const Encabezado = ({ children }) => {
                       <div className="producto-carrito" key={producto.id}>
                         <div className="info-producto-carrito">
                           <span className="cantidad-producto-carrito">
-                            {producto.stock}
+                            {producto.cantCarrito}
                           </span>
                           <p className="titulo-producto-carrito">
                             {producto.nombreProducto}
@@ -86,23 +86,23 @@ export const Encabezado = ({ children }) => {
                           </span>
                         </div>
                         <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="icono-cerrar"
-                          onClick={() => {
-                            eliminarProducto(producto);
-                            setActivo(true);
-                          }}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="icono-cerrar"
+                            onClick={() => {
+                              eliminarProducto(producto);
+                              setActivo(true);
+                            }}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
                       </div>
                     ))}
                   </div>

@@ -1,6 +1,10 @@
-
-@media (max-width: 1170px){
-    .filtro{
-        display: none;
-    }
+.contenedor-productos-tienda {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas de igual tamaño */
+  gap: 1rem; /* Espacio entre columnas */
+}
+@media (max-width: 1170px) {
+  .filtro {
+    display: none;
+  }
 }

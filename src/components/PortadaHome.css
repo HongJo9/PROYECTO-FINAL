@@ -64,12 +64,33 @@
     grid-template-columns: 1fr;
   }
 
-  .portada-home2 {
-    min-height: 100px;
-  }
-
   .portada-home21,
   .portada-home22 {
-    min-height: 200px;
+    min-height: 130px;
+    background-position: left; 
+  }
+
+  .portada-home221 {
+    min-height: 150px;
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* No repite la imagen */
+  }
+  
+  .portada-home222 {
+    min-height: 150px;
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* No repite la imagen */
+  }
+
+  .portada-home211 {
+    min-height: 150px;
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* No repite la imagen */
+  }
+  
+  .portada-home212 {
+    min-height: 150px;
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* No repite la imagen */
   }
 }
