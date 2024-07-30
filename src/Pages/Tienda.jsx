@@ -62,8 +62,8 @@ const Tienda = () => {
   return (
     <>
       <div className="tienda">
-        <div className="portada-tienda">
-          <h1 className="text-white text-6xl font-bold">
+        <div className="portada-tienda" style={{ backgroundImage: "url('Baner de paginas TIENDA.jpg')" }}>
+          <h1 className="text-white text-6xl font-bold" >
             Nuestra Tienda
           </h1>
         </div>
@@ -124,7 +124,7 @@ const Tienda = () => {
           </div>
           <div>
             {/* Los productos mostrados desde la tienda */}
-            <div className="contenedor-productos-tienda" style={{ backgroundImage: "url('Baner de paginas TIENDA.jpg')" }}>
+            <div className="contenedor-productos-tienda">
               {productosPaginados.map((producto) => (
                 <div className="producto" key={producto.id}>
                   <figure>
