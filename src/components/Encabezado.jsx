@@ -7,6 +7,7 @@ export const Encabezado = ({ children }) => {
   const { carrito, setCarrito, total, setTotal, contador, setContador } =
     useContext(proveedor);
   const [activo, setActivo] = useState(false);
+  const [menu, setMenu] = useState(false);
 
   const eliminarProducto = (producto) => {
     const resultados = carrito.filter((item) => item.id !== producto.id);
@@ -23,9 +24,14 @@ export const Encabezado = ({ children }) => {
 
   return (
     <>
-      <header>
+      <header className="z-10">
         <div className="amburguesa">
-          <img className="w-10" src="amburguesa.png" alt="" />
+          <img
+            className="w-10"
+            src="amburguesa.png"
+            alt=""
+            onClick={() => setMenu(true)}
+          />
         </div>
         <div className="flex items-center gap-8">
           <img className="w-28" src="logo.jpg" alt="" />
@@ -86,23 +92,23 @@ export const Encabezado = ({ children }) => {
                           </span>
                         </div>
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="icono-cerrar"
-                            onClick={() => {
-                              eliminarProducto(producto);
-                              setActivo(true);
-                            }}
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M6 18L18 6M6 6l12 12"
-                            />
-                          </svg>
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="icono-cerrar"
+                          onClick={() => {
+                            eliminarProducto(producto);
+                            setActivo(true);
+                          }}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
                       </div>
                     ))}
                   </div>
@@ -123,6 +129,43 @@ export const Encabezado = ({ children }) => {
           </div>
         </div>
       </header>
+      <div
+        className={`menu-responsivo ${
+          menu ? "menu-responsivo-active" : ""
+        } bg-red-700 w-1/2 h-screen absolute top-0 z-10`}
+      >
+        <div>
+          <h2 className="flex justify-end items-center pt-5 px-5 bg text-white ">
+            <span
+              className="bg-slate-400 py-1 items-center px-3"
+              onClick={() => setMenu(false)}
+            >
+              X
+            </span>
+          </h2>
+        </div>
+        <div className="p-10">
+          <h2 className="text-white font-bold text-3xl px-5">Menu</h2>
+          <ul className="text-white">
+            <li className="p-3" onClick={() => setMenu(false)}>
+              <Link to="/">Home</Link>
+            </li>
+            <hr />
+            <li className="p-3" onClick={() => setMenu(false)}>
+              <Link to="/tienda">Tienda</Link>
+            </li>
+            <hr />
+            <li className="p-3" onClick={() => setMenu(false)}>
+              <Link to="/nosotros">Nosotros</Link>
+            </li>
+            <hr />
+            <li className="p-3" onClick={() => setMenu(false)}>
+              <Link to="/contactanos">Contactanos</Link>
+            </li>
+            <hr />
+          </ul>
+        </div>
+      </div>
       {children}
     </>
   );

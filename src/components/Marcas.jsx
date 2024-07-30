@@ -1,15 +1,32 @@
-import React from 'react'
-import "./Marca.css"
+import React, { useState } from 'react';
+import "./Marca.css";
 
 export default function Marcas() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const marcas = [
+    "marca1.png",
+    "marca2.png",
+    "marca3.png",
+    "marca4.png",
+    "marca5.png",
+    "marca6.png"
+  ];
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === marcas.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? marcas.length - 1 : prev - 1));
+  };
+
   return (
-    <div className=' p-12 flex justify-around bg-slate-400'>
-        <img className='w-40' src="marca1.png" alt="" />
-        <img className='w-40' src="marca2.png" alt="" />
-        <img className='w-40' src="marca3.png" alt="" />
-        <img className='w-40' src="marca4.png" alt="" />
-        <img className='w-40' src="marca5.png" alt="" />
-        <img className='w-40' src="marca6.png" alt="" />
+    <div className='carousel-container'>
+      <button className='prev' onClick={prevSlide}>Prev</button>
+      <div className='carousel-slide'>
+        <img className='w-40' src={marcas[currentSlide]} alt={`Marca ${currentSlide + 1}`} />
+      </div>
+      <button className='next' onClick={nextSlide}>Next</button>
     </div>
-  )
+  );
 }

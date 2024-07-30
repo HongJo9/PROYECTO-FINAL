@@ -3,9 +3,14 @@
     border-radius: 35px;
 }
 
-.noticias{
+.noticias {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 50px;
-
-}
+  }
+  
+  @media (max-width: 768px) {
+    .noticias {
+      grid-template-columns: 1fr;
+    }
+  }
