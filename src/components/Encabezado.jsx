@@ -4,10 +4,18 @@ import "./Encabezado.css";
 import proveedor from "../context/proveedor";
 
 export const Encabezado = ({ children }) => {
-  const { carrito, setCarrito, total, setTotal, contador, setContador } =
-    useContext(proveedor);
-  const [activo, setActivo] = useState(false);
-  const [menu, setMenu] = useState(false);
+  const {
+    carrito,
+    setCarrito,
+    total,
+    setTotal,
+    contador,
+    setContador,
+    menu,
+    setMenu,
+    activo, setActivo
+  } = useContext(proveedor);
+  
 
   const eliminarProducto = (producto) => {
     const resultados = carrito.filter((item) => item.id !== producto.id);
@@ -69,70 +77,82 @@ export const Encabezado = ({ children }) => {
                 <span id="contador-productos">{contador}</span>
               </div>
             </div>
-
-            <div
-              className={`contenedor-carrito-productos ${
-                activo ? "" : "carrito-oculto"
-              }`}
-            >
-              {carrito.length ? (
-                <>
-                  <div className="fila-productos">
-                    {carrito.map((producto) => (
-                      <div className="producto-carrito" key={producto.id}>
-                        <div className="info-producto-carrito">
-                          <span className="cantidad-producto-carrito">
-                            {producto.cantCarrito}
-                          </span>
-                          <p className="titulo-producto-carrito">
-                            {producto.nombreProducto}
-                          </p>
-                          <span className="precio-producto-carrito">
-                            S/.{producto.precio}
-                          </span>
-                        </div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="icono-cerrar"
-                          onClick={() => {
-                            eliminarProducto(producto);
-                            setActivo(true);
-                          }}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="total-carrito">
-                    <h3>Total:</h3>
-                    <span className="total-pagar">S/.{total}</span>
-                  </div>
-
-                  <div className="btn-vaciar" onClick={vaciarCarrito}>
-                    <button>Vaciar Carrito</button>
-                  </div>
-                </>
-              ) : (
-                <p className="carrito-vacio">El carrito está vacío</p>
-              )}
-            </div>
           </div>
         </div>
       </header>
       <div
+        className={`contenedor-carrito-productos ${
+          activo ? "" : "carrito-oculto"
+        }`}
+      >
+        <div className="flex">
+          <span className="flex items-center justify-center w-3/4 border-b-2">
+            Carrito de compras
+          </span>
+          <span
+            className="bg-red-700 p-5 text-white text-right cursor-pointer w-1/4"
+            onClick={() => {
+              setActivo(false);
+            }}
+          >
+            Cerrar
+          </span>
+        </div>
+        {carrito.length ? (
+          <>
+            <div className="fila-productos">
+              {carrito.map((producto) => (
+                <div className="producto-carrito" key={producto.id}>
+                  <div className="info-producto-carrito">
+                    <span className="cantidad-producto-carrito">
+                      {producto.cantCarrito}
+                    </span>
+                    <p className="titulo-producto-carrito">
+                      {producto.nombreProducto}
+                    </p>
+                    <span className="precio-producto-carrito">
+                      S/.{producto.precio}
+                    </span>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="icono-cerrar"
+                    onClick={() => {
+                      eliminarProducto(producto);
+                      setActivo(true);
+                    }}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </div>
+              ))}
+            </div>
+
+            <div className="total-carrito">
+              <h3>Total:</h3>
+              <span className="total-pagar">S/.{total}</span>
+            </div>
+
+            <div className="btn-vaciar" onClick={vaciarCarrito}>
+              <button>Vaciar Carrito</button>
+            </div>
+          </>
+        ) : (
+          <p className="carrito-vacio">El carrito está vacío</p>
+        )}
+      </div>
+      <div
         className={`menu-responsivo ${
           menu ? "menu-responsivo-active" : ""
-        } bg-red-700 w-1/2 h-screen absolute top-0 z-10`}
+        } bg-red-700 w-1/2 h-screen top-0 z-10`}
       >
         <div>
           <h2 className="flex justify-end items-center pt-5 px-5 bg text-white ">

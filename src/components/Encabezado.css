@@ -39,14 +39,15 @@ header {
 }
 
 .contenedor-carrito-productos {
-  position: absolute;
-  top: 50px;
+  position: fixed;
+  top: 0px;
   right: 0;
   background-color: #fff;
   width: 400px;
-  z-index: 1;
+  z-index: 10;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+  min-height: 100vh;
 }
 
 .carrito-oculto {
@@ -170,11 +171,13 @@ header {
   display: none;
   transform: translateX(-100%);
   transition: transform 0.5s ease-in-out;
+  position: fixed;
 }
 
 .menu-responsivo-active {
   display: block;
   transform: translateX(0);
+  
 }
 
 @media (max-width: 885px) {
@@ -198,8 +201,8 @@ header {
 
   /* Los objetos cuando se preciona el carrito */
   .contenedor-carrito-productos {
-    width: 340px;
-    top: 80px;
+    width: 280px;
+    top: 0px;
   }
 
 
