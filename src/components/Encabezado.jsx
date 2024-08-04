@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Encabezado.css";
 import proveedor from "../context/proveedor";
 
@@ -34,12 +34,12 @@ export const Encabezado = () => {
     <>
       <header className="z-10">
         <div className="amburguesa">
-            <img
-              className="w-10"
-              src="amburguesa.png"
-              alt=""
-              onClick={() => setMenu(true)}
-            />
+          <img
+            className="w-10"
+            src="amburguesa.png"
+            alt=""
+            onClick={() => setMenu(true)}
+          />
         </div>
         <div className="flex items-center gap-8">
           <Link to="/">
@@ -47,17 +47,53 @@ export const Encabezado = () => {
           </Link>
           <nav>
             <ul className="flex justify-center space-x-10 text-black">
-              <li className="hover:text-gray-500">
-                <Link to="/">Home</Link>
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "hover:text-gray-500 font-bold"
+                      : "hover:text-gray-500"
+                  }
+                >
+                  Home
+                </NavLink>
               </li>
-              <li className="hover:text-gray-500">
-                <Link to="/tienda">Tienda</Link>
+              <li>
+                <NavLink
+                  to="/tienda"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "hover:text-gray-500 font-bold"
+                      : "hover:text-gray-500"
+                  }
+                >
+                  Tienda
+                </NavLink>
               </li>
-              <li className="hover:text-gray-500">
-                <Link to="/nosotros">Nosotros</Link>
+              <li>
+                <NavLink
+                  to="/nosotros"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "hover:text-gray-500 font-bold"
+                      : "hover:text-gray-500"
+                  }
+                >
+                  Nosotros
+                </NavLink>
               </li>
-              <li className="hover:text-gray-500">
-                <Link to="/contactanos">Contactanos</Link>
+              <li>
+                <NavLink
+                  to="/contactanos"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "hover:text-gray-500 font-bold"
+                      : "hover:text-gray-500"
+                  }
+                >
+                  Contactanos
+                </NavLink>
               </li>
             </ul>
           </nav>
