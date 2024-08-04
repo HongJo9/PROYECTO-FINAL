@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Encabezado.css";
 import proveedor from "../context/proveedor";
 
-export const Encabezado = ({ children }) => {
+export const Encabezado = () => {
   const {
     carrito,
     setCarrito,
@@ -13,9 +13,9 @@ export const Encabezado = ({ children }) => {
     setContador,
     menu,
     setMenu,
-    activo, setActivo
+    activo,
+    setActivo,
   } = useContext(proveedor);
-  
 
   const eliminarProducto = (producto) => {
     const resultados = carrito.filter((item) => item.id !== producto.id);
@@ -34,15 +34,17 @@ export const Encabezado = ({ children }) => {
     <>
       <header className="z-10">
         <div className="amburguesa">
-          <img
-            className="w-10"
-            src="amburguesa.png"
-            alt=""
-            onClick={() => setMenu(true)}
-          />
+            <img
+              className="w-10"
+              src="amburguesa.png"
+              alt=""
+              onClick={() => setMenu(true)}
+            />
         </div>
         <div className="flex items-center gap-8">
-          <img className="w-28" src="logo.jpg" alt="" />
+          <Link to="/">
+            <img className="w-28" src="logo.jpg" alt="" />
+          </Link>
           <nav>
             <ul className="flex justify-center space-x-10 text-black">
               <li className="hover:text-gray-500">
@@ -186,7 +188,6 @@ export const Encabezado = ({ children }) => {
           </ul>
         </div>
       </div>
-      {children}
     </>
   );
 };
