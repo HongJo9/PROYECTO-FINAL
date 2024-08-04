@@ -23,7 +23,7 @@ const Nosotros = () => {
             </h2>
             <p className="text-gray-600 mb-4">
               En nuestra tienda de auriculares, nos apasiona ofrecer la mejor
-              calidad de sonido para los amantes de la música. Fundada en [Año],
+              calidad de sonidos para los amantes de la música. Fundada en [Año],
               hemos crecido hasta convertirnos en un referente en el mercado de
               auriculares, siempre buscando las últimas innovaciones y
               tecnologías para nuestros clientes.
